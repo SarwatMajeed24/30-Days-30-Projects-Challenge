@@ -9,7 +9,7 @@ export default function Countdown() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);  
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleSetDuration = (): void => {
     if (typeof duration === "number" && duration > 0) {
@@ -57,6 +57,16 @@ export default function Countdown() {
     }
   };
 
+  const handleDelete = (): void => {
+    setIsActive(false);
+    setIsPaused(false); 
+    setTimeLeft(0);
+    setDuration(""); // Clear the duration input
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+  };
+
   useEffect(() => {
     if (isActive && !isPaused) {
       timerRef.current = setInterval(() => {
@@ -95,8 +105,8 @@ export default function Countdown() {
     <div className="flex h-screen bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500">
       {/* Timer container */}
       <div className="flex-1 flex items-center justify-center">
-        <div className="bg-yellow-100 shadow-lg rounded-full p-20 w-auto max-w-lg border border-gray-300 text-center ">
-          <h1 className="text-4xl font-extrabold mb-6 text-red-800 ">
+        <div className="bg-yellow-100 shadow-lg rounded-full p-20 w-auto max-w-lg border border-gray-300 text-center">
+          <h1 className="text-4xl font-extrabold mb-6 text-red-800">
             Countdown Timer
           </h1>
           <div className="flex items-center mb-6">
@@ -120,45 +130,50 @@ export default function Countdown() {
             {formatTime(timeLeft)}
           </div>
         
-      
-      {/* Button container */}
-      <div className="flex-1 flex items-center justify-center">
-      <div className="w-48 bg-amber-800 shadow-lg rounded-lg p-4 border border-gray-300">
-        <div className="flex flex-col gap-4">
-          <Button
-            onClick={handleStart}
-            variant="default"
-            className="bg-blue-500 text-black font-bold hover:bg-blue-600"
-          >
-            {isPaused ? "Resume" : "Start"}
-          </Button>
-          <Button
-            onClick={handlePause}
-            variant="default"
-            className="bg-yellow-500 text-black font-bold hover:bg-yellow-600"
-          >
-            Pause
-          </Button>
-          <Button
-            onClick={handleStop} // Added Stop Button
-            variant="default"
-            className="bg-gray-500 text-black font-bold hover:bg-gray-600"
-          >
-            Stop
-          </Button>
-          <Button
-            onClick={handleReset}
-            variant="default"
-            className="bg-red-500 text-black font-bold hover:bg-red-600"
-          >
-            Reset
-          </Button>
+          {/* Button container */}
+          <div className="flex-1 flex items-center justify-center">
+          <div className="w-48 bg-amber-800 shadow-lg rounded-lg p-4 border border-gray-300">
+            <div className="flex flex-col gap-4">
+              <Button
+                onClick={handleStart}
+                variant="default"
+                className="bg-blue-500 text-black font-bold hover:bg-blue-600"
+              >
+                {isPaused ? "Resume" : "Start"}
+              </Button>
+              <Button
+                onClick={handlePause}
+                variant="default"
+                className="bg-yellow-500 text-black font-bold hover:bg-yellow-600"
+              >
+                Pause
+              </Button>
+              <Button
+                onClick={handleStop} // Added Stop Button
+                variant="default"
+                className="bg-gray-500 text-black font-bold hover:bg-gray-600"
+              >
+                Stop
+              </Button>
+              <Button
+                onClick={handleReset}
+                variant="default"
+                className="bg-red-500 text-black font-bold hover:bg-red-600"
+              >
+                Reset
+              </Button>
+              <Button
+                onClick={handleDelete}
+                variant="default"
+                className="bg-violet-400 text-black font-bold hover:bg-red-600"
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-  </div>
   </div>
   );
 }
-
