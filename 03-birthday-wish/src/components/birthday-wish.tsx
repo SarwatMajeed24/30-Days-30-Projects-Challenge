@@ -1,6 +1,6 @@
 'use client'; // Enables client-side rendering for this component
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { motion, AnimatePresence } from 'framer-motion';
@@ -99,9 +99,9 @@ export default function BirthdayWish() {
     <div className="min-h-screen flex flex-col items-center justify-start p-4" style={{ backgroundColor }}>
       {/* Heading section at the top of the page */}
       <header className="w-full text-center mb-8 flex flex-col items-center">
-        <h1 className="text-6xl font-extrabold text-black font-serif mb-2">Happy Birthday to me!</h1>
-        <h2 className="text-3xl font-semibold text-red-700">Sarwat Majeed</h2>
-        <p className="text-xl text-blue-700">13th October</p>
+        <h1 className="text-8xl font-extrabold text-black font-serif mb-2">Happy Birthday to me!</h1>
+        <h2 className="text-5xl font-semibold text-red-700">Sarwat Majeed</h2>
+        <p className="text-4xl text-blue-700">13th October</p>
       </header>
 
       {/* Centered and resized card */}
